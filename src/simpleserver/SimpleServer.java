@@ -1,8 +1,18 @@
 package simpleserver;
 
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.oracle.javafx.jmx.json.JSONReader;
+import com.oracle.tools.packager.IOUtils;
+import jdk.nashorn.internal.parser.JSONParser;
+
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.List;
 
 class SimpleServer {
 
@@ -10,6 +20,33 @@ class SimpleServer {
     ServerSocket ding;
     Socket dong = null;
     String resource = null;
+
+    InputStream inputStream = new FileInputStream("data.json");
+    JsonParser jsonParser = new JsonParser();
+    JsonObject jsonRootObject = (JsonObject) jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
+    JsonArray usersArray = jsonRootObject.getAsJsonArray("users");
+    JsonArray postsArray = jsonRootObject.getAsJsonArray("posts");
+
+    HashMap<String, User> userHashMap = new HashMap<>();
+    HashMap<String, Post> postHashMap = new HashMap<>();
+    for (JsonElement user : usersArray) {
+          JsonObject userObject = user.getAsJsonObject();
+          String userName = userObject.get("userid").getAsString();
+          String userId = userObject.get("username").getAsString();
+          User newUser = new User(userName, userId);
+          userHashMap.put(userId, newUser);
+          System.out.println(userHashMap.get(userId).getUserName()); //just to test and see
+    }
+
+    for (JsonElement post : postsArray) {
+          JsonObject postObject = post.getAsJsonObject();
+          String userId = postObject.get("userid").getAsString();
+          String postId = postObject.get("postid").getAsString();
+          String postData = postObject.get("data").getAsString();
+          Post newPost = new Post(userId, postId, postData);
+          postHashMap.put(postId, newPost);
+    }
+
     try {
       ding = new ServerSocket(1299);
       System.out.println("Opened socket " + 1299);
