@@ -20,32 +20,10 @@ class SimpleServer {
     ServerSocket ding;
     Socket dong = null;
     String resource = null;
+    String dataFile = "data.json";
 
-    InputStream inputStream = new FileInputStream("data.json");
-    JsonParser jsonParser = new JsonParser();
-    JsonObject jsonRootObject = (JsonObject) jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
-    JsonArray usersArray = jsonRootObject.getAsJsonArray("users");
-    JsonArray postsArray = jsonRootObject.getAsJsonArray("posts");
-
-    HashMap<String, User> userHashMap = new HashMap<>();
-    HashMap<String, Post> postHashMap = new HashMap<>();
-    for (JsonElement user : usersArray) {
-          JsonObject userObject = user.getAsJsonObject();
-          String userName = userObject.get("userid").getAsString();
-          String userId = userObject.get("username").getAsString();
-          User newUser = new User(userName, userId);
-          userHashMap.put(userId, newUser);
-          System.out.println(userHashMap.get(userId).getUserName()); //just to test and see
-    }
-
-    for (JsonElement post : postsArray) {
-          JsonObject postObject = post.getAsJsonObject();
-          String userId = postObject.get("userid").getAsString();
-          String postId = postObject.get("postid").getAsString();
-          String postData = postObject.get("data").getAsString();
-          Post newPost = new Post(userId, postId, postData);
-          postHashMap.put(postId, newPost);
-    }
+    //Initializes database on server start.
+    Database database = new Database(dataFile);
 
     try {
       ding = new ServerSocket(1299);
