@@ -22,7 +22,6 @@ public class Database {
             String userId = userObject.get("username").getAsString();
             User newUser = new User(userName, userId);
             userHashMap.put(userId, newUser);
-            System.out.println(userHashMap.get(userId).getUserName()); //just to test and see
         }
 
         for (JsonElement post : postsArray) {

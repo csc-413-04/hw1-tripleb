@@ -21,6 +21,7 @@ class SimpleServer {
     Socket dong = null;
     String resource = null;
     String dataFile = "data.json";
+    String requestString;
 
     //Initializes database on server start.
     Database database = new Database(dataFile);
@@ -51,6 +52,8 @@ class SimpleServer {
           while (line != null && line.trim().length() > 0) {
             int index = line.indexOf(": ");
             if (index > 0) {
+              //
+
               System.out.println(line);
             } else {
               break;
