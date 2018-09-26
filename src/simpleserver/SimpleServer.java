@@ -52,8 +52,9 @@ class SimpleServer {
           while (line != null && line.trim().length() > 0) {
             int index = line.indexOf(": ");
             if (index > 0) {
-              //
-
+              if (line.contains("Referer")) {
+                requestString = line;
+              }
               System.out.println(line);
             } else {
               break;
