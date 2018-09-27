@@ -1,18 +1,8 @@
 package simpleserver;
 
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import com.oracle.javafx.jmx.json.JSONReader;
-import com.oracle.tools.packager.IOUtils;
-import jdk.nashorn.internal.parser.JSONParser;
-
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.List;
 
 class SimpleServer {
 
