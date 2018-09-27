@@ -3,6 +3,7 @@ package simpleserver;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 
 class SimpleServer {
 
@@ -11,7 +12,8 @@ class SimpleServer {
     Socket dong = null;
     String resource = null;
     String dataFile = "data.json";
-    String requestString;
+    String requestString = "";
+    String query ="";
 
     //Initializes database on server start.
     Database database = new Database(dataFile);
@@ -52,6 +54,10 @@ class SimpleServer {
             line = in.readLine();
           }
           System.out.println("----------REQUEST END---------\n\n");
+
+          String[] refererString = requestString.split("/");           //parsing for query of request URL
+          query = refererString[refererString.length-1];                  //if URL has / after query, query is bad
+
         } catch (IOException e) {
           System.out.println("Error reading");
           System.exit(1);
