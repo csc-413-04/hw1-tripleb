@@ -2,10 +2,11 @@ package simpleserver;
 
 public class QueryFactory {
 
-    public static Processor makeProcessor(String request, String[] args) {
+
+    public static queryFactory (String request, String[] args) {
       switch(request) {
         case "/users":
-          return new UserProcessor(args);
+          return new (args);
         break;
         case "/posts":
           return new PostProcessor(args);
