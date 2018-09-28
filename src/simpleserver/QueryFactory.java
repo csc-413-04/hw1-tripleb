@@ -2,6 +2,16 @@ package simpleserver;
 
 public class QueryFactory {
 
-    // gets raw url from simpleserver url request
-    // determines what to do with it, creates new response
-}
+    public static Processor makeProcessor(String request, String[] args) {
+      switch(request) {
+        case "/users":
+          return new UserProcessor(args);
+        break;
+        case "/posts":
+          return new PostProcessor(args);
+        break;
+      }
+      return null;
+    }
+  }
+
