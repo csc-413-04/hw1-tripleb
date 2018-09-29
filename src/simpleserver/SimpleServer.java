@@ -65,7 +65,10 @@ class SimpleServer {
 
         BufferedOutputStream out = new BufferedOutputStream(dong.getOutputStream());
         PrintWriter writer = new PrintWriter(out, true);  // char output to the client
-
+        /*
+        Query soQuery = QueryFactory(String request, String args);
+        String responseJson = soQuery.getResponseString();
+        */
         // every response will always have the status-line, date, and server name
         writer.println("HTTP/1.1 200 OK");
         writer.println("Server: TEST");
@@ -74,6 +77,7 @@ class SimpleServer {
         writer.println("");
 
         // Body of our response
+
         writer.println("<h1>Some cool response!</h1>");
 
         dong.close();
