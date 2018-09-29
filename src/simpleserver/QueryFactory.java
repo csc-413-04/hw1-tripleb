@@ -2,14 +2,13 @@ package simpleserver;
 
 public class QueryFactory {
 
-
-    public static queryFactory (String request, String[] args) {
+    public static QueryFactory (String request, String[] args) {
       switch(request) {
         case "/users":
-          return new (args);
+          return new UserQuery(args);
         break;
         case "/posts":
-          return new PostProcessor(args);
+          return new PostQuery(args);
         break;
       }
       return null;
