@@ -3,7 +3,7 @@ package simpleserver;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-public class QueryFactory {
+public class  QueryFactory {
     public QueryFactory() {
     }
 
@@ -24,6 +24,10 @@ public class QueryFactory {
             response.add("data", newPostQuery.getResponse());
             return response;
         }
-        return null;
+        else{
+            JsonObject response = new JsonObject();
+            response.addProperty("status", "ERROR");
+            return response;
+        }
     }
 }
