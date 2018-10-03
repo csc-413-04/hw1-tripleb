@@ -8,13 +8,6 @@ import java.util.HashMap;
 public class Database {
     private HashMap<String, User> userHashMap = new HashMap<>();
     private HashMap<String, Post> postHashMap = new HashMap<>();
-
-<<<<<<< HEAD
-    public Database (String fileExtension) throws FileNotFoundException, UnsupportedEncodingException {
-        InputStream inputStream = new FileInputStream(fileExtension);
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonRootObject = (JsonObject) jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
-=======
     private static Database instance;
 
     private Database () {
@@ -31,19 +24,13 @@ public class Database {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
->>>>>>> master
         JsonArray usersArray = jsonRootObject.getAsJsonArray("users");
         JsonArray postsArray = jsonRootObject.getAsJsonArray("posts");
 
         for (JsonElement user : usersArray) {
             JsonObject userObject = user.getAsJsonObject();
-<<<<<<< HEAD
-            String userName = userObject.get("userid").getAsString();
-            String userId = userObject.get("username").getAsString();
-=======
             String userId = userObject.get("userid").getAsString();
             String userName = userObject.get("username").getAsString();
->>>>>>> master
             User newUser = new User(userName, userId);
             userHashMap.put(userId, newUser);
         }
@@ -58,8 +45,6 @@ public class Database {
         }
     }
 
-<<<<<<< HEAD
-=======
     public static synchronized Database getInstance() {
         if(instance == null){
             instance = new Database();
@@ -67,7 +52,6 @@ public class Database {
         return instance;
     }
 
->>>>>>> master
     public ArrayList<User> getAllUsers() {
         // returns ArrayList of all users as ArrayList of User objects
         ArrayList userList = new ArrayList();
@@ -87,17 +71,10 @@ public class Database {
     }
     public Post getPostByLength(String postId, String maxLength) {
         // returns Post object or null per parammeters
-<<<<<<< HEAD
-        if (postHashMap.get(postId) != null && postHashMap.get(postId).getPostData().length() <= Integer.parseInt(maxLength)) {
-            return postHashMap.get(postId);
-        }
-        return null;
-=======
         if (postHashMap.get(postId).getPostData().length() < 100) {
             return postHashMap.get(postId);
         } else {
             return null;
         }
->>>>>>> master
     }
 }
