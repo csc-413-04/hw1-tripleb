@@ -7,4 +7,8 @@ public class Query {
     public String status;
     public int entries;
     public JsonArray data;
+
+    public Query () {
+
+    }
 }

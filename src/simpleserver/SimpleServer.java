@@ -11,9 +11,7 @@ class SimpleServer {
     public static void main(String[] args) throws IOException {
         ServerSocket ding;
         Socket dong = null;
-        String resource = null;
-        String queryResponse = "";
-        URL requestUrl;
+        String queryResponse = null;
 
         //Initializes database on server start.
         Database database = Database.getInstance();
@@ -44,11 +42,12 @@ class SimpleServer {
                         int index = line.indexOf(": ");
                         if (index > 0) {
                             if (line.contains("Referer")) {
-                                requestUrl = new URL(line.substring(9));
+                                URL requestUrl = new URL(line.substring(9));
                                 String path = requestUrl.getPath().substring(1);
                                 String query = requestUrl.getQuery();
                                 queryResponse = queryFactory.getQuery(path, query).toString();
                             }
+                            System.out.println(line);
                         } else {
                             break;
                         }
@@ -71,7 +70,11 @@ class SimpleServer {
                 writer.println("");
 
                 // Body of our response
-                writer.println("<h1>" + queryResponse + "</h1>");
+                if (queryResponse == null) {
+                    writer.println("<h1> NO QUERY </h1>");
+                } else {
+                    writer.println("<h1>" + queryResponse + "</h1>");
+                }
 
                 dong.close();
             }
