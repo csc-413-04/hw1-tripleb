@@ -48,7 +48,7 @@ public class Database {
         return userHashMap.get(userId);
     }
     public Post getPost(String postId) {
-        // retuns desired post
+        // returns desired post
         return postHashMap.get(postId);
     }
     public Post getPostByLength(String postId, String maxLength) {

@@ -6,10 +6,9 @@ public class QueryFactory {
       switch(request) {
         case "/users":
           return new UserQuery(args);
-        break;
+
         case "/posts":
           return new PostQuery(args);
-        break;
       }
       return null;
     }
