@@ -1,6 +1,6 @@
 package simpleserver;
 
-public abstract class Query {
-  String responce;
-  public abstract String getResponseString();
+public interface Query {
+  String response = "";
+  String getResponseString();
 }

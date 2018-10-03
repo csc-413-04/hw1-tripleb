@@ -1,15 +1,20 @@
 package simpleserver;
 
 import com.google.gson.*;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Database {
+    private static Database instance = null;
+
     private HashMap<String, User> userHashMap = new HashMap<>();
     private HashMap<String, Post> postHashMap = new HashMap<>();
 
-    public Database (String fileExtension) throws FileNotFoundException, UnsupportedEncodingException {
+    private Database() {};
+
+    public void setDatabase(String fileExtension) throws FileNotFoundException, UnsupportedEncodingException {
         InputStream inputStream = new FileInputStream(fileExtension);
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonRootObject = (JsonObject) jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
@@ -21,7 +26,7 @@ public class Database {
             String userName = userObject.get("userid").getAsString();
             String userId = userObject.get("username").getAsString();
             User newUser = new User(userName, userId);
-            userHashMap.put(userId, newUser);
+            this.userHashMap.put(userId, newUser);
         }
 
         for (JsonElement post : postsArray) {
@@ -30,7 +35,7 @@ public class Database {
             String postId = postObject.get("postid").getAsString();
             String postData = postObject.get("data").getAsString();
             Post newPost = new Post(userId, postId, postData);
-            postHashMap.put(postId, newPost);
+            this.postHashMap.put(postId, newPost);
         }
     }
 
@@ -58,4 +63,12 @@ public class Database {
         }
         return null;
     }
+
+    public static Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
+    }
+
 }

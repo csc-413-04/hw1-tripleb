@@ -13,10 +13,13 @@ class SimpleServer {
     String resource = null;
     String dataFile = "data.json";
     String requestString = "";
-    String query ="";
+    String requestParameters ="";
 
     //Initializes database on server start.
-    Database database = new Database(dataFile);
+
+    Database instance = Database.getInstance();
+    instance.setDatabase(dataFile);
+    instance = Database.getInstance();
 
     try {
       ding = new ServerSocket(1299);
@@ -56,8 +59,8 @@ class SimpleServer {
           System.out.println("----------REQUEST END---------\n\n");
 
           String[] refererString = requestString.split("/");           //parsing for query of request URL
-          query = refererString[refererString.length-1];                  //if URL has / after query, query is bad
-
+          requestString = refererString[0];                  //if URL has / after query, query is bad
+          requestParameters = refererString[refererString.length-1];
         } catch (IOException e) {
           System.out.println("Error reading");
           System.exit(1);
@@ -66,7 +69,9 @@ class SimpleServer {
         BufferedOutputStream out = new BufferedOutputStream(dong.getOutputStream());
         PrintWriter writer = new PrintWriter(out, true);  // char output to the client
 
-        Query soQuery = QueryFactory( request, args);
+        QueryFactory myQueryFactory  = new QueryFactory();
+        Query soQuery = myQueryFactory.getQuery(requestString , requestParameters);
+
         String responseJson = soQuery.getResponseString();
         //responseJson is the json version of whatever was requested
         // every response will always have the status-line, date, and server name

@@ -2,7 +2,7 @@ package simpleserver;
 
 import java.util.ArrayList;
 
-public class PostQuery extends Query {
+public class PostQuery implements Query {
 
     String response;
     String delim = "[=&]+";
@@ -18,11 +18,11 @@ public void  maxLength(String length){
 
 public PostQuery(String url){
 
-    Database database = Database();
+    Database instance = Database.getInstance();
     String [] arguments = url.split(delim);
     para = arguments.length;
     if(para > 2 ){
-        post = database.getPost(arguments[1]);
+        post = instance.getPost(arguments[1]);
         postList.add(post);
         ResponseBuilder a = new ResponseBuilder(postList);
         this.response = (a.constructResponse(postList));
@@ -30,7 +30,7 @@ public PostQuery(String url){
 
             switch (arguments[0]){
                 case "postid" :
-                    post = database.getPost(arguments[1]);
+                    post = instance.getPost(arguments[1]);
                     postList.add(post);
                     maxLength(arguments[3]);
                     ResponseBuilder a = new ResponseBuilder(postList);
@@ -38,7 +38,7 @@ public PostQuery(String url){
 
                     break;
                 case "maxlength":
-                    post = database.getPost(arguments[3]);
+                    post = instance.getPost(arguments[3]);
                     maxLength(arguments[1]);
                     postList.add(post);
                     ResponseBuilder b = new ResponseBuilder(postList);
