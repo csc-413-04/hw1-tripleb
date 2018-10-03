@@ -18,11 +18,7 @@ class SimpleServer {
         //Initializes database on server start.
         Database database = Database.getInstance();
         QueryFactory queryFactory = new QueryFactory();
-        ArrayList<User> users = database.getAllUsers();
-        for (User x : users) {
-            System.out.println(x.getUserId());
-        }
-
+        
         try {
             ding = new ServerSocket(1299);
             System.out.println("Opened socket " + 1299);
@@ -53,10 +49,8 @@ class SimpleServer {
                                 requestUrl = new URL(line.substring(9));
                                 String path = requestUrl.getPath().substring(1);
                                 String query = requestUrl.getQuery();
-                                System.out.println(path + "----" + query);
                                 queryResponse = queryFactory.getQuery(path, query).toString();
                             }
-                            System.out.println(line);
                         } else {
                             break;
                         }
