@@ -1,22 +1,5 @@
 package simpleserver;
 
-<<<<<<< HEAD
-public class QueryFactory {
-
-    public Query QueryFactory(String request, String args) {
-      switch(request) {
-        case "/users":
-          return new UserQuery(args);
-        break;
-        case "/posts":
-          return new PostQuery(args);
-        break;
-      }
-      return null;
-    }
-  }
-
-=======
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -44,4 +27,3 @@ public class QueryFactory {
         return null;
     }
 }
->>>>>>> master

@@ -2,27 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fcbeaf3-41cb-42f9-92fa-e8fb421d8a10" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/gson-2.8.5.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/PostQuery.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/Query.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/ResponseBuilder.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/UserQuery.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/simpleserver/PostQuery.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/simpleserver/UserQuery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/Database.class" afterPath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/Database.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/QueryFactory.class" afterPath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/QueryFactory.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/Response.class" afterPath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/Response.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/SimpleServer.class" afterPath="$PROJECT_DIR$/out/production/Lecture2/simpleserver/SimpleServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lecture2.iml" afterPath="$PROJECT_DIR$/Lecture2.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data.json" afterPath="$PROJECT_DIR$/data.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simpleserver/Database.java" afterPath="$PROJECT_DIR$/src/simpleserver/Database.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simpleserver/Post.java" afterPath="$PROJECT_DIR$/src/simpleserver/Post.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simpleserver/Query.java" afterPath="$PROJECT_DIR$/src/simpleserver/Query.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simpleserver/QueryFactory.java" afterPath="$PROJECT_DIR$/src/simpleserver/QueryFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simpleserver/Response.java" afterPath="$PROJECT_DIR$/src/simpleserver/Response.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simpleserver/ResponseBuilder.java" afterPath="$PROJECT_DIR$/src/simpleserver/ResponseBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simpleserver/SimpleServer.java" afterPath="$PROJECT_DIR$/src/simpleserver/SimpleServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/simpleserver/User.java" afterPath="$PROJECT_DIR$/src/simpleserver/User.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,7 +39,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Lecture2.iml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Lecture2.iml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lecture2.iml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
@@ -92,12 +72,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QueryFactory.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="QueryFactory.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/simpleserver/QueryFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="66" lean-forward="false" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="66" />
-              <folding />
+            <state relative-caret-position="315">
+              <caret line="21" column="60" lean-forward="false" selection-start-line="21" selection-start-column="60" selection-end-line="21" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -106,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/data.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="783">
-              <caret line="455" column="1" lean-forward="true" selection-start-line="455" selection-start-column="1" selection-end-line="455" selection-end-column="1" />
+              <caret line="455" column="1" lean-forward="false" selection-start-line="455" selection-start-column="1" selection-end-line="455" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -176,9 +158,9 @@
         <option value="$PROJECT_DIR$/src/simpleserver/SimpleServer.java" />
         <option value="$PROJECT_DIR$/src/simpleserver/Database.java" />
         <option value="$PROJECT_DIR$/src/simpleserver/PostQuery.java" />
-        <option value="$PROJECT_DIR$/src/simpleserver/QueryFactory.java" />
         <option value="$PROJECT_DIR$/src/simpleserver/UserQuery.java" />
         <option value="$PROJECT_DIR$/Lecture2.iml" />
+        <option value="$PROJECT_DIR$/src/simpleserver/QueryFactory.java" />
       </list>
     </option>
   </component>
@@ -339,12 +321,12 @@
       <option name="presentableId" value="Default" />
       <updated>1536013569490</updated>
       <workItem from="1536013572962" duration="196000" />
-      <workItem from="1538527134944" duration="17864000" />
+      <workItem from="1538527134944" duration="17915000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18060000" />
+    <option name="totallyTimeSpent" value="18111000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1711" y="71" width="1345" height="1336" extended-state="0" />
@@ -470,14 +452,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/simpleserver/QueryFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="66" lean-forward="false" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/simpleserver/Query.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -507,7 +481,7 @@
     <entry file="file://$PROJECT_DIR$/data.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="783">
-          <caret line="455" column="1" lean-forward="true" selection-start-line="455" selection-start-column="1" selection-end-line="455" selection-end-column="1" />
+          <caret line="455" column="1" lean-forward="false" selection-start-line="455" selection-start-column="1" selection-end-line="455" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -517,6 +491,16 @@
         <state relative-caret-position="135">
           <caret line="9" column="88" lean-forward="false" selection-start-line="9" selection-start-column="88" selection-end-line="9" selection-end-column="88" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/simpleserver/QueryFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="60" lean-forward="false" selection-start-line="21" selection-start-column="60" selection-end-line="21" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
