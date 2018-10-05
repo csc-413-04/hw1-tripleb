@@ -21,16 +21,31 @@ public class UserQuery extends Query {
         if (queryParams != null) {
             entries = 1;
             status = "OK";
+            try {
 
-            JsonObject responseObject = new JsonObject();
-            responseObject.addProperty("status", status);
-            responseObject.addProperty("entries", entries);
-            JsonObject dataObject = new JsonObject();
-            dataObject.addProperty("userid", database.getUser(queryParams[1]).getUserId());
-            dataObject.addProperty("username", database.getUser(queryParams[1]).getUserName());
-            data.add(dataObject);
-            responseObject.add("data", data);
-            return responseObject;
+                if (!"userid".matches(queryParams[0])) {
+                    //System.out.println(queryParams[0] + "LOOKY" + queryParams[1]);
+                    JsonObject responseObject = new JsonObject();
+                    responseObject.addProperty("status", "ERROR");
+                    responseObject.addProperty("entries", "NULL");
+                    return responseObject;
+                } else {
+                    JsonObject responseObject = new JsonObject();
+                    responseObject.addProperty("status", status);
+                    responseObject.addProperty("entries", entries);
+                    JsonObject dataObject = new JsonObject();
+                    dataObject.addProperty("userid", database.getUser(queryParams[1]).getUserId());
+                    dataObject.addProperty("username", database.getUser(queryParams[1]).getUserName());
+                    data.add(dataObject);
+                    responseObject.add("data", data);
+                    return responseObject;
+                }
+            } catch (Exception e) {
+                JsonObject responseObject = new JsonObject();
+                responseObject.addProperty("status", "ERROR");
+                responseObject.addProperty("entries", "NULL");
+                return responseObject;
+            }
 
         } else {
             entries = 0;
