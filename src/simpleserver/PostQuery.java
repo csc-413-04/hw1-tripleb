@@ -17,7 +17,7 @@ public class PostQuery extends Query {
         data = new JsonArray();
     }
 
-    public JsonArray getResponse() {
+    public JsonObject getResponse() {
         Database database = Database.getInstance();
         if (queryParams == null) {
             queryParams = mQuery.split("=");
@@ -25,36 +25,69 @@ public class PostQuery extends Query {
                 data = null;
                 entries = 0;
                 status = "Error";
-                return data;
+                JsonObject responseObject = new JsonObject();
+                responseObject.addProperty("status", status);
+                responseObject.addProperty("entries", entries);
+                responseObject.add("data", data);
+                return responseObject;
             } else {
                 entries = 1;
                 status = "OK";
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("postid", database.getPost(queryParams[1]).getPostId());
-                jsonObject.addProperty("userid", database.getPost(queryParams[1]).getUserId());
-                jsonObject.addProperty("data", database.getPost(queryParams[1]).getPostData());
-                data.add(jsonObject);
-                return data;
+                try {
+                    JsonObject responseObject = new JsonObject();
+                    responseObject.addProperty("status", status);
+                    responseObject.addProperty("entries", entries);
+
+                    JsonObject dataObject = new JsonObject();
+                    dataObject.addProperty("postid", database.getPost(queryParams[1]).getPostId());
+                    dataObject.addProperty("userid", database.getPost(queryParams[1]).getUserId());
+                    dataObject.addProperty("data", database.getPost(queryParams[1]).getPostData());
+                    data.add(dataObject);
+                    responseObject.add("data", data);
+                    return responseObject;
+                } catch (NullPointerException e) {
+                    JsonObject responseObject = new JsonObject();
+                    responseObject.addProperty("status", "ERROR");
+                    responseObject.addProperty("entries", "NULL");
+                    return responseObject;
+
+                }
+
             }
         } else {
-            Map<String, String> dataMap = new HashMap<String, String>();
+            Map<String, String> dataMap = new HashMap<>();
             for (String q : queryParams) {
                 String[] qa = q.split("=");
                 String id = qa[0];
                 String value = qa[1];
                 dataMap.put(id, value);
             }
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("postid", database.getPostByLength(dataMap.get("postid"),
-                    dataMap.get("maxlength")).getPostId());
-            jsonObject.addProperty("postid", database.getPostByLength(dataMap.get("postid"),
-                    dataMap.get("maxlength")).getUserId());
-            jsonObject.addProperty("postid", database.getPostByLength(dataMap.get("postid"),
-                    dataMap.get("maxlength")).getPostData());
-            status = "OK";
-            entries = jsonObject.size();
-            data.add(jsonObject);
-            return data;
+
+
+            try {
+                status = "OK";
+                entries = 1;
+                JsonObject responseObject = new JsonObject();
+                responseObject.addProperty("status", status);
+                responseObject.addProperty("entries", entries);
+
+                JsonObject dataObject = new JsonObject();
+                dataObject.addProperty("postid", database.getPostByLength(dataMap.get("postid"),
+                        dataMap.get("maxlength")).getPostId());
+                dataObject.addProperty("userid", database.getPostByLength(dataMap.get("postid"),
+                        dataMap.get("maxlength")).getUserId());
+                dataObject.addProperty("data", database.getPostByLength(dataMap.get("postid"),
+                        dataMap.get("maxlength")).getPostData());
+                data.add(dataObject);
+                responseObject.add("data", data);
+                return responseObject;
+            } catch (NullPointerException e) {
+                JsonObject responseObject = new JsonObject();
+                responseObject.addProperty("status", "ERROR");
+                responseObject.addProperty("entries", "NULL");
+                return responseObject;
+
+            }
         }
     }
 }

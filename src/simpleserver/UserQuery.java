@@ -16,27 +16,53 @@ public class UserQuery extends Query {
         data = new JsonArray();
     }
 
-    public JsonArray getResponse() {
+    public JsonObject getResponse() {
         Database database = Database.getInstance();
         if (queryParams != null) {
             entries = 1;
             status = "OK";
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("userid", database.getUser(queryParams[1]).getUserId());
-            jsonObject.addProperty("username", database.getUser(queryParams[1]).getUserName());
-            data.add(jsonObject);
-            return data;
+            try {
+
+                if (!"userid".matches(queryParams[0])) {
+                    //System.out.println(queryParams[0] + "LOOKY" + queryParams[1]);
+                    JsonObject responseObject = new JsonObject();
+                    responseObject.addProperty("status", "ERROR");
+                    responseObject.addProperty("entries", "NULL");
+                    return responseObject;
+                } else {
+                    JsonObject responseObject = new JsonObject();
+                    responseObject.addProperty("status", status);
+                    responseObject.addProperty("entries", entries);
+                    JsonObject dataObject = new JsonObject();
+                    dataObject.addProperty("userid", database.getUser(queryParams[1]).getUserId());
+                    dataObject.addProperty("username", database.getUser(queryParams[1]).getUserName());
+                    data.add(dataObject);
+                    responseObject.add("data", data);
+                    return responseObject;
+                }
+            } catch (Exception e) {
+                JsonObject responseObject = new JsonObject();
+                responseObject.addProperty("status", "ERROR");
+                responseObject.addProperty("entries", "NULL");
+                return responseObject;
+            }
+
         } else {
+            entries = 0;
+            status = "OK";
             ArrayList<User> users = database.getAllUsers();
             for (User x : users) {
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("userid", x.getUserId());
-                jsonObject.addProperty("username", x.getUserName());
-                data.add(jsonObject);
+                JsonObject dataObject = new JsonObject();
+                dataObject.addProperty("userid", x.getUserId());
+                dataObject.addProperty("username", x.getUserName());
+                data.add(dataObject);
+                entries += 1;
             }
-            entries = users.size();
-            status = "OK";
-            return data;
+            JsonObject response = new JsonObject();
+            response.addProperty("status", status);
+            response.addProperty("entries", entries);
+            response.add("data", data);
+            return response;
 
         }
     }

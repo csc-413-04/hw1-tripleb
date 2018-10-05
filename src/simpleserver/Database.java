@@ -8,7 +8,6 @@ import java.util.HashMap;
 public class Database {
     private HashMap<String, User> userHashMap = new HashMap<>();
     private HashMap<String, Post> postHashMap = new HashMap<>();
-
     private static Database instance;
 
     private Database () {
@@ -67,15 +66,20 @@ public class Database {
         return userHashMap.get(userId);
     }
     public Post getPost(String postId) {
-        // retuns desired post
+        // returns desired post
         return postHashMap.get(postId);
     }
     public Post getPostByLength(String postId, String maxLength) {
         // returns Post object or null per parammeters
-        if (postHashMap.get(postId).getPostData().length() < 100) {
-            return postHashMap.get(postId);
-        } else {
+        try {
+            if (postHashMap.get(postId).getPostData().length() <= Integer.parseInt(maxLength)) {
+                return postHashMap.get(postId);
+            } else {
+                return null;
+            }
+        } catch (NumberFormatException e) {
             return null;
         }
+
     }
 }
