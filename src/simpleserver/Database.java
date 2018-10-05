@@ -71,10 +71,15 @@ public class Database {
     }
     public Post getPostByLength(String postId, String maxLength) {
         // returns Post object or null per parammeters
-        if (postHashMap.get(postId).getPostData().length() < 100) {
-            return postHashMap.get(postId);
-        } else {
+        try {
+            if (postHashMap.get(postId).getPostData().length() <= Integer.parseInt(maxLength)) {
+                return postHashMap.get(postId);
+            } else {
+                return null;
+            }
+        } catch (NumberFormatException e) {
             return null;
         }
+
     }
 }

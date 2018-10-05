@@ -33,42 +33,61 @@ public class PostQuery extends Query {
             } else {
                 entries = 1;
                 status = "OK";
-                JsonObject responseObject = new JsonObject();
-                responseObject.addProperty("status", status);
-                responseObject.addProperty("entries", entries);
+                try {
+                    JsonObject responseObject = new JsonObject();
+                    responseObject.addProperty("status", status);
+                    responseObject.addProperty("entries", entries);
 
-                JsonObject dataObject = new JsonObject();
-                dataObject.addProperty("postid", database.getPost(queryParams[1]).getPostId());
-                dataObject.addProperty("userid", database.getPost(queryParams[1]).getUserId());
-                dataObject.addProperty("data", database.getPost(queryParams[1]).getPostData());
-                data.add(dataObject);
-                responseObject.add("data", data);
-                return responseObject;
+                    JsonObject dataObject = new JsonObject();
+                    dataObject.addProperty("postid", database.getPost(queryParams[1]).getPostId());
+                    dataObject.addProperty("userid", database.getPost(queryParams[1]).getUserId());
+                    dataObject.addProperty("data", database.getPost(queryParams[1]).getPostData());
+                    data.add(dataObject);
+                    responseObject.add("data", data);
+                    return responseObject;
+                } catch (NullPointerException e) {
+                    JsonObject responseObject = new JsonObject();
+                    responseObject.addProperty("status", "ERROR");
+                    responseObject.addProperty("entries", "NULL");
+                    return responseObject;
+
+                }
+
             }
         } else {
-            Map<String, String> dataMap = new HashMap<String, String>();
+            Map<String, String> dataMap = new HashMap<>();
             for (String q : queryParams) {
                 String[] qa = q.split("=");
                 String id = qa[0];
                 String value = qa[1];
                 dataMap.put(id, value);
             }
-            status = "OK";
-            entries = 1;
-            JsonObject responseObject = new JsonObject();
-            responseObject.addProperty("status", status);
-            responseObject.addProperty("entries", entries);
 
-            JsonObject dataObject = new JsonObject();
-            dataObject.addProperty("postid", database.getPostByLength(dataMap.get("postid"),
-                    dataMap.get("maxlength")).getPostId());
-            dataObject.addProperty("postid", database.getPostByLength(dataMap.get("postid"),
-                    dataMap.get("maxlength")).getUserId());
-            dataObject.addProperty("postid", database.getPostByLength(dataMap.get("postid"),
-                    dataMap.get("maxlength")).getPostData());
-            data.add(dataObject);
-            responseObject.add("data", data);
-            return responseObject;
+
+            try {
+                status = "OK";
+                entries = 1;
+                JsonObject responseObject = new JsonObject();
+                responseObject.addProperty("status", status);
+                responseObject.addProperty("entries", entries);
+
+                JsonObject dataObject = new JsonObject();
+                dataObject.addProperty("postid", database.getPostByLength(dataMap.get("postid"),
+                        dataMap.get("maxlength")).getPostId());
+                dataObject.addProperty("userid", database.getPostByLength(dataMap.get("postid"),
+                        dataMap.get("maxlength")).getUserId());
+                dataObject.addProperty("data", database.getPostByLength(dataMap.get("postid"),
+                        dataMap.get("maxlength")).getPostData());
+                data.add(dataObject);
+                responseObject.add("data", data);
+                return responseObject;
+            } catch (NullPointerException e) {
+                JsonObject responseObject = new JsonObject();
+                responseObject.addProperty("status", "ERROR");
+                responseObject.addProperty("entries", "NULL");
+                return responseObject;
+
+            }
         }
     }
 }
